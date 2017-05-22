@@ -13,13 +13,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
     
     var userIsTyping = false
+    var isFloatingPoint = false
     
     @IBAction func touchDigit(_ sender: UIButton) {
         //Demonstrates how to call a function.
         drawHorizontalLine(from: 5.0, to: 8.5, using: UIColor.blue)
         let digit = sender.currentTitle!
+        
         if userIsTyping {
             let textCurrentlyInDisplay = display.text!
+            if digit == "." && textCurrentlyInDisplay.range(of: ".") != nil {
+                return;
+            }
             display.text = textCurrentlyInDisplay + digit
             print("\(digit) was touched")
         } else {
